@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Investigation | SafeClaim AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="result-page">
+
+<div class="container">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <span>🛡</span> SafeClaim AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/claim">
+                Detect Claim
+            </a>
+
+            <a href="/performance">
+                Model
+            </a>
+
+            <a href="/about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="investigation-header">
+
+        <div>
+
+            <div class="report-label">
+                AI CLAIM INVESTIGATION
+            </div>
+
+            <h1>
+                Investigation Report
+            </h1>
+
+            <p>
+                The model risk estimate and rule-based claim review indicators are reported separately below.
+            </p>
+
+        </div>
+
+
+        <div class="claim-id-box">
+
+            <span>CLAIM ID</span>
+
+            <strong>
+                {{ claim_id }}
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MAIN RISK PANEL ================= -->
+
+    <section class="risk-hero">
+
+        <div class="risk-hero-left">
+
+            <div class="small-label">
+                MODEL FRAUD PROBABILITY
+            </div>
+
+            <div class="risk-number">
+                {{ confidence }}<span>%</span>
+            </div>
+
+            <div class="model-classification">
+                <span>MODEL CLASSIFICATION</span>
+                <strong>{{ prediction }}</strong>
+            </div>
+
+            <div class="risk-description">
+
+                {% if confidence >= 70 %}
+
+                    Elevated fraud probability detected.
+                    Manual investigation is recommended.
+
+                {% elif confidence >= 30 %}
+
+                    The claim contains indicators that require
+                    additional verification.
+
+                {% else %}
+
+                    No significant fraud probability detected
+                    by the current model.
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="risk-progress">
+
+                <div class="risk-progress-track">
+
+                    <div class="risk-progress-value"
+                         style="width: {{ confidence }}%;">
+                    </div>
+
+                </div>
+
+                <div class="risk-scale">
+
+                    <span>LOW</span>
+                    <span>MEDIUM</span>
+                    <span>HIGH</span>
+
+                </div>
+
+            </div>
+
+            <p class="probability-note">This percentage is the model's estimated probability for the fraudulent class. Review bands: under 30% low, 30–69.99% review, 70% and above high.</p>
+
+        </div>
+
+
+        <div class="risk-hero-right">
+
+            <div class="risk-orbit">
+
+                <div class="risk-orbit-inner">
+
+                    <span>RISK</span>
+
+                    <strong>
+                        {{ risk_level }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= STATUS STRIP ================= -->
+
+    <section class="status-strip">
+
+        <div class="status-item">
+
+            <span class="status-icon">
+                ◉
+            </span>
+
+            <div>
+
+                <small>
+                    MODEL STATUS
+                </small>
+
+                <strong>
+                    ANALYSIS COMPLETE
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="status-divider"></div>
+
+
+        <div class="status-item">
+
+            <span class="status-icon">
+                ◇
+            </span>
+
+            <div>
+
+                <small>
+                    MODEL
+                </small>
+
+                <strong>
+                    BAYESIAN XGBOOST
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="status-divider"></div>
+
+
+        <div class="status-item">
+
+            <span class="status-icon">
+                ◎
+            </span>
+
+            <div>
+
+                <small>
+                    DECISION
+                </small>
+
+                <strong>
+                    {{ investigation_decision }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= TWO COLUMN AREA ================= -->
+
+    <section class="investigation-grid">
+
+
+        <!-- ================= INVESTIGATION INDICATORS ================= -->
+
+        <div class="investigation-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        01
+                    </span>
+
+                    <h2>
+                        Rule-based Review Indicators
+                    </h2>
+
+                </div>
+
+                <p>
+                    Claim-level signals
+                </p>
+
+            </div>
+
+
+            <div class="indicator-list">
+
+                <p class="indicator-note">These checks explain claim details that may deserve attention. They do not change the XGBoost prediction or its probability.</p>
+
+                <div class="rule-priority">
+                    <div><span>DEMO RULE SUMMARY</span><strong>{{ rule_review_priority }}</strong></div>
+                    <p>{{ rule_review_reason }} This is an educational review-priority rule, not a fraud finding.</p>
+                </div>
+
+                {% for finding in findings %}
+
+                <div class="indicator-row">
+
+                    <div class="indicator-marker
+                        {% if finding.level == 'HIGH' %}
+                            indicator-high
+                        {% elif finding.level == 'MEDIUM' %}
+                            indicator-medium
+                        {% else %}
+                            indicator-low
+                        {% endif %}
+                    ">
+                    </div>
+
+
+                    <div class="indicator-content">
+
+                        <div class="indicator-top">
+
+                            <strong>
+                                {{ finding.title }}
+                            </strong>
+
+                            <span class="
+                                {% if finding.level == 'HIGH' %}
+                                    level-high
+                                {% elif finding.level == 'MEDIUM' %}
+                                    level-medium
+                                {% else %}
+                                    level-low
+                                {% endif %}
+                            ">
+                                {{ finding.level }}
+                            </span>
+
+                        </div>
+
+                        <p>
+                            {{ finding.description }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= CLAIM PROFILE ================= -->
+
+        <div class="investigation-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        02
+                    </span>
+
+                    <h2>
+                        Claim Profile
+                    </h2>
+
+                </div>
+
+                <p>
+                    Submitted attributes
+                </p>
+
+            </div>
+
+
+            <div class="profile-grid">
+
+                <div class="profile-item">
+
+                    <span>Vehicle Brand</span>
+
+                    <strong>
+                        {{ make }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Vehicle Price</span>
+
+                    <strong>
+                        {{ price }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Accident Area</span>
+
+                    <strong>
+                        {{ area }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Vehicle Age</span>
+
+                    <strong>
+                        {{ vehicle_age }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Policy Holder Age</span>
+
+                    <strong>
+                        {{ age }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Gender</span>
+
+                    <strong>
+                        {{ gender }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Previous Claims</span>
+
+                    <strong>
+                        {{ claims }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Accident Fault</span>
+
+                    <strong>
+                        {{ fault }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Police Report</span>
+
+                    <strong>
+                        {{ police }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>Witness</span>
+
+                    <strong>
+                        {{ witness }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= INVESTIGATION TIMELINE ================= -->
+
+    <section class="timeline-card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    03
+                </span>
+
+                <h2>
+                    Investigation Timeline
+                </h2>
+
+            </div>
+
+            <p>
+                Automated processing sequence
+            </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <div class="timeline-step completed">
+
+                <div class="timeline-dot">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Claim Received
+                    </strong>
+
+                    <span>
+                        Claim information successfully submitted
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-line"></div>
+
+
+            <div class="timeline-step completed">
+
+                <div class="timeline-dot">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Data Analysis
+                    </strong>
+
+                    <span>
+                        Claim attributes prepared for model analysis
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-line"></div>
+
+
+            <div class="timeline-step completed">
+
+                <div class="timeline-dot">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        XGBoost Prediction
+                    </strong>
+
+                    <span>
+                        Bayesian optimized model generated risk probability
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-line"></div>
+
+
+            <div class="timeline-step active">
+
+                <div class="timeline-dot">
+                    !
+                </div>
+
+                <div>
+
+                    <strong>
+                        Investigation Generated
+                    </strong>
+
+                    <span>
+                        Claim indicators and review status prepared
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= DECISION PANEL ================= -->
+
+    <section class="decision-panel">
+
+        <div class="decision-content">
+
+            <span class="decision-label">
+                INVESTIGATION STATUS
+            </span>
+
+            <h2>
+                {{ investigation_decision }}
+            </h2>
+
+            <p>
+                SafeClaim AI provides a machine-learning risk assessment
+                to support claim investigation. Final claim decisions
+                should be made through appropriate human review.
+            </p>
+
+        </div>
+
+
+        <div class="decision-actions">
+
+            <a href="/claim" class="secondary-action">
+                Analyze Another
+            </a>
+
+            <button class="primary-action"
+                    onclick="window.print()">
+                Export Report
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="report-footer">
+
+        <span>
+            SAFECLAIM AI
+        </span>
+
+        <span>
+            AI-POWERED INSURANCE CLAIM INVESTIGATION
+        </span>
+
+    </footer>
+
+
+</div>
+
+</body>
+</html>

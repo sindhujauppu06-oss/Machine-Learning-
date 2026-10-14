@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Claim Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🛡 SafeClaim AI</div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a class="active-link" href="/claim">Detect Claim</a>
+            <a href="/performance">Model</a>
+            <a href="/about">About</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header">
+        <h1>Insurance Claim Analysis</h1>
+        <p>Enter the claim and incident details. The model prediction and the supporting review indicators are shown separately.</p>
+    </section>
+
+    <!-- Form -->
+    <div class="form-card">
+
+        <form action="/predict" method="POST">
+
+            <div class="form-grid">
+
+                <!-- Age -->
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" name="Age" placeholder="Enter age" min="16" max="100" required>
+                </div>
+
+                <!-- Gender -->
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select name="Gender" required>
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+
+                <!-- Marital Status -->
+                <div class="input-group">
+                    <label>Marital Status</label>
+                    <select name="MaritalStatus" required>
+                        <option value="">Select Status</option>
+                        <option>Single</option>
+                        <option>Married</option>
+                        <option>Widowed</option>
+                        <option>Divorced</option>
+                    </select>
+                </div>
+
+                <!-- Vehicle Brand (Dropdown) -->
+                <div class="input-group">
+                    <label>Vehicle Brand</label>
+                    <select name="Make" required>
+                        <option value="">Select Vehicle Brand</option>
+                        <option>Accura</option>
+                        <option>BMW</option>
+                        <option>Chevrolet</option>
+                        <option>Dodge</option>
+                        <option>Ford</option>
+                        <option>Honda</option>
+                        <option>Jeep</option>
+                        <option>Lexus</option>
+                        <option>Mazda</option>
+                        <option>Mercedes</option>
+                        <option>Nissan</option>
+                        <option>Pontiac</option>
+                        <option>Saab</option>
+                        <option>Saturn</option>
+                        <option>Toyota</option>
+                        <option>VW</option>
+                    </select>
+                </div>
+
+                <!-- Vehicle Price -->
+                <div class="input-group">
+                    <label>Vehicle Price</label>
+                    <select name="VehiclePrice" required>
+                        <option value="">Select Price Range</option>
+                        <option>less than 20000</option>
+                        <option>20000 to 29000</option>
+                        <option>30000 to 39000</option>
+                        <option>40000 to 59000</option>
+                        <option>60000 to 69000</option>
+                        <option>more than 69000</option>
+                    </select>
+                </div>
+
+                <!-- Age of Vehicle -->
+                <div class="input-group">
+                    <label>Age of Vehicle</label>
+                    <select name="AgeOfVehicle" required>
+                        <option value="">Select Vehicle Age</option>
+                        <option>new</option>
+                        <option>2 years</option>
+                        <option>3 years</option>
+                        <option>4 years</option>
+                        <option>5 years</option>
+                        <option>6 years</option>
+                        <option>7 years</option>
+                        <option>more than 7 years</option>
+                    </select>
+                </div>
+
+                <!-- Month of Accident -->
+                <div class="input-group">
+                    <label>Month of Accident</label>
+                    <select name="Month" required>
+                        <option value="">Select Month</option>
+                        <option>Jan</option><option>Feb</option><option>Mar</option>
+                        <option>Apr</option><option>May</option><option>Jun</option>
+                        <option>Jul</option><option>Aug</option><option>Sep</option>
+                        <option>Oct</option><option>Nov</option><option>Dec</option>
+                    </select>
+                </div>
+
+                <!-- Accident Area -->
+                <div class="input-group">
+                    <label>Accident Area</label>
+                    <select name="AccidentArea" required>
+                        <option value="">Select Area</option>
+                        <option>Urban</option>
+                        <option>Rural</option>
+                    </select>
+                </div>
+
+                <!-- Fault -->
+                <div class="input-group">
+                    <label>Who is at Fault?</label>
+                    <select name="Fault" required>
+                        <option value="">Select Option</option>
+                        <option>Policy Holder</option>
+                        <option>Third Party</option>
+                    </select>
+                </div>
+
+                <!-- Police Report -->
+                <div class="input-group">
+                    <label>Police Report Filed?</label>
+                    <select name="PoliceReportFiled" required>
+                        <option value="">Select Option</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <!-- Witness -->
+                <div class="input-group">
+                    <label>Witness Present?</label>
+                    <select name="WitnessPresent" required>
+                        <option value="">Select Option</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <!-- Agent Type -->
+                <div class="input-group">
+                    <label>Agent Type</label>
+                    <select name="AgentType" required>
+                        <option value="">Select Agent Type</option>
+                        <option>External</option>
+                        <option>Internal</option>
+                    </select>
+                </div>
+
+                <!-- Past Claims -->
+                <div class="input-group">
+                    <label>Past Number of Claims</label>
+                    <select name="PastNumberOfClaims" required>
+                        <option value="">Select Past Claims</option>
+                        <option>none</option>
+                        <option>1</option>
+                        <option>2 to 4</option>
+                        <option>more than 4</option>
+                    </select>
+                </div>
+
+                <!-- Supplements -->
+                <div class="input-group">
+                    <label>Number of Supplements</label>
+                    <select name="NumberOfSuppliments" required>
+                        <option value="">Select Supplements</option>
+                        <option>none</option>
+                        <option>1</option>
+                        <option>2 to 4</option>
+                        <option>more than 4</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="predict-btn">
+                Analyze Insurance Claim
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

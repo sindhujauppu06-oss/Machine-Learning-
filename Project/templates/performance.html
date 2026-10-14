@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Performance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar">
+        <div class="logo">🛡 SafeClaim AI</div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/claim">Detect Claim</a>
+            <a class="active-link" href="/performance">Model</a>
+            <a href="/about">About</a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Bayesian XGBoost Performance Dashboard</h1>
+        <p>Evaluation Metrics of Insurance Fraud Detection Model</p>
+    </section>
+
+    <div class="metrics-grid">
+
+        <div class="metric-box">
+            <h4>Accuracy</h4>
+            <h2>95.43%</h2>
+        </div>
+
+        <div class="metric-box">
+            <h4>Precision</h4>
+            <h2>82.56%</h2>
+        </div>
+
+        <div class="metric-box">
+            <h4>Recall</h4>
+            <h2>36.04%</h2>
+        </div>
+
+        <div class="metric-box">
+            <h4>F1 Score</h4>
+            <h2>50.18%</h2>
+        </div>
+
+        <div class="metric-box">
+            <h4>ROC-AUC</h4>
+            <h2>67.76%</h2>
+        </div>
+
+    </div>
+
+    <div class="chart-card">
+        <h2>ROC Curve</h2>
+        <p>Place your ROC Curve image here.</p>
+    </div>
+
+    <div class="chart-card">
+        <h2>Confusion Matrix</h2>
+        <p>Place your Confusion Matrix image here.</p>
+    </div>
+
+    <div class="chart-card">
+        <h2>Model Comparison</h2>
+
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Basic</th>
+                <th>Grid</th>
+                <th>Bayesian</th>
+            </tr>
+
+            <tr><td>Accuracy</td><td>95.10%</td><td>94.29%</td><td>95.43%</td></tr>
+            <tr><td>Precision</td><td>76.14%</td><td>92.00%</td><td>82.56%</td></tr>
+            <tr><td>Recall</td><td>34.01%</td><td>11.68%</td><td>36.04%</td></tr>
+            <tr><td>F1 Score</td><td>47.02%</td><td>20.72%</td><td>50.18%</td></tr>
+            <tr><td>ROC-AUC</td><td>66.64%</td><td>55.80%</td><td>67.76%</td></tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

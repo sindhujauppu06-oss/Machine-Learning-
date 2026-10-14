@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f1e9">
+  <title>SafeClaim | Claims intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body><div class="container">
+  <nav class="navbar"><a class="logo" href="/"><span class="brand-mark">S</span><span>safeclaim<small>CLAIMS INTELLIGENCE</small></span></a><div class="nav-links"><a class="active-link" href="/">Overview</a><a href="/claim">New analysis</a><a href="/performance">Model</a><a href="/about">Project</a></div><a class="nav-cta" href="/claim">Analyze a claim <span>↗</span></a></nav>
+  <main>
+    <div class="eyebrow"><span class="live-dot"></span> MACHINE LEARNING COURSE PROJECT <span class="eyebrow-rule"></span> VEHICLE INSURANCE</div>
+    <section class="hero hero-editorial"><div class="hero-left"><div class="hero-kicker">SAFECLAIM · CLAIM REVIEW DEMO</div><h1>Insurance claim<br>fraud <em>detection.</em></h1><p>Explore how an XGBoost machine-learning model classifies vehicle insurance claims. Enter claim details to see its prediction, estimated risk, and separate review indicators.</p><a class="hero-action" href="/claim">Analyze a claim <span>↗</span></a><div class="hero-footnote"><span class="mini-shield">✳</span> XGBoost classification <i></i> Educational project demonstration</div></div>
+      <div class="hero-art" aria-label="Abstract claim analysis illustration"><div class="art-top"><span>CLAIM SIGNAL / 01</span><span>MODEL VIEW</span></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-center"><span>SC</span><small>SAFECLAIM</small></div><div class="art-node node-a">01 <b>PROFILE</b></div><div class="art-node node-b">02 <b>CONTEXT</b></div><div class="art-node node-c">03 <b>SIGNAL</b></div><div class="art-bottom"><span>CLAIM REVIEW</span><span class="art-line"></span><span>READY</span></div></div>
+    </section>
+    <section class="stat-row"><div class="stat-intro"><span class="section-index">01 / AT A GLANCE</span><h2>A small project<br>with a big question.</h2></div><div class="stat-card"><span class="stat-label">REPORTED ACCURACY</span><strong>95<span>.43</span><small>%</small></strong><p>Bayesian optimized XGBoost</p><div class="stat-accent"></div></div><div class="stat-card"><span class="stat-label">SOURCE DATASET</span><strong>15,420</strong><p>Vehicle claim records</p><div class="stat-accent accent-orange"></div></div><div class="stat-card"><span class="stat-label">INPUT SIGNALS</span><strong>15</strong><p>Claim & policy attributes</p><div class="stat-accent accent-blue"></div></div></section>
+    <section class="pathway"><div class="pathway-heading"><div><span class="section-index">02 / HOW TO EXPLORE</span><h2>From claim details to model signal.</h2></div><a href="/about">About the project <span>↗</span></a></div><div class="steps-grid"><article class="step-card"><span class="step-number">01</span><div class="step-icon">＋</div><h3>Build a profile</h3><p>Enter the vehicle, policyholder and incident details in the claim form.</p><a href="/claim">Open claim form <b>↗</b></a></article><article class="step-card"><span class="step-number">02</span><div class="step-icon step-icon-orange">⌁</div><h3>Run the model</h3><p>The trained classifier evaluates the submitted attributes and returns a prediction.</p><a href="/performance">View model metrics <b>↗</b></a></article><article class="step-card"><span class="step-number">03</span><div class="step-icon step-icon-blue">↗</div><h3>Review the result</h3><p>Explore the risk estimate and the rule-based indicators shown with each result.</p><a href="/claim">Try an analysis <b>↗</b></a></article></div></section>
+    <footer class="site-footer"><span><span class="brand-mark small-mark">S</span> SAFECLAIM <i>·</i> MACHINE LEARNING COURSE PROJECT</span><span>Predictions are for educational demonstration.</span></footer>
+  </main>
+</div></body></html>

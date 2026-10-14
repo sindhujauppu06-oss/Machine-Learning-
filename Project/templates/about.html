@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar">
+        <div class="logo">🛡 SafeClaim AI</div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/claim">Detect Claim</a>
+            <a href="/performance">Model</a>
+            <a class="active-link" href="/about">About</a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>About Insurance Claim Fraud Detection</h1>
+        <p>AI & DS Mini Project | KLH University</p>
+    </section>
+
+    <div class="about-card">
+
+        <h2>Project Objective</h2>
+
+        <p>
+            Insurance Claim Fraud Detection is a Machine Learning web application
+            that predicts whether a vehicle insurance claim is genuine or fraudulent
+            using Bayesian Optimized XGBoost.
+        </p>
+
+        <h2>Dataset</h2>
+
+        <p>fraud_oracle.csv containing vehicle insurance claim records.</p>
+
+        <h2>Machine Learning Algorithm</h2>
+
+        <ul>
+            <li>Basic XGBoost</li>
+            <li>Grid Search XGBoost</li>
+            <li><b>Bayesian Optimized XGBoost (Final Model)</b></li>
+        </ul>
+
+        <h2>Technologies Used</h2>
+
+        <div class="tech-grid">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>Pandas</span>
+            <span>XGBoost</span>
+            <span>Joblib</span>
+        </div>
+
+        <h2>Final Model Accuracy</h2>
+
+        <div class="accuracy-banner">
+            95.43% Accuracy using Bayesian Hyperparameter Optimization
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
